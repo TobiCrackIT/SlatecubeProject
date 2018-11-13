@@ -1,0 +1,39 @@
+
+<% include ../partials/header%>
+
+
+<div class="text-center mt-5">
+
+  <form action="/posts" method="POST" style="width:50%">
+    <div class="form-group">
+      <input class="form-control" type="text" name="message" placeholder="Enter Your Post">
+    </div>
+    
+        <div class ="form-group">
+            <input class="btn btn-dark" type="submit">
+    
+        </div>
+    </form>
+    
+    
+
+</div>
+
+
+
+<div class="container text-center">
+
+
+<% allPosts.forEach(function(post){ %>
+
+  <h1><%=post.message%></h1>
+
+  <form action="/posts/<%=post._id%>?_method=DELETE" method="POST" style="display:block">
+    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button> 
+  </form>
+<% }) %>
+
+
+
+</div>
+<% include ../partials/footer%>
