@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   fullName: String,
   userName: {type: String, set: toLower},
   password: String,
-  image: String,
   date: { type: Date, default: Date.now }
 
 });

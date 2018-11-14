@@ -6,10 +6,10 @@ const express = require("express"),
         methodOverride = require("method-override"),
         mongoose =    require("mongoose"),
         passport     = require("passport"),
-      LocalStrategy= require("passport-local"),
-      session       = require("express-session"),
-      allPost          = require("./models/posts.js"),
-      User          = require("./models/users.js");
+         LocalStrategy= require("passport-local"),
+         session       = require("express-session"),
+         allPost          = require("./models/posts.js"),
+         User          = require("./models/users.js");
 
 
       // connect MONGODB
@@ -40,6 +40,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Set Local Variables
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  // res.locals.error = req.flash("error");
+  // res.locals.success = req.flash("success"); 
+  next();
+});
 
 
 //REQUIRE ALLL ROUTES

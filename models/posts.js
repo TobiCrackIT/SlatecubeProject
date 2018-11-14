@@ -4,8 +4,18 @@ const mongoose = require("mongoose");
 
 let postSchema = new mongoose.Schema({
 
-message : String,
-
+title:{
+  type: String,
+  required: true
+},
+message:{
+  type:String,
+  required: true
+},
+date: {
+  type: Date,
+  default: Date.now
+},
 // associate post with user
 author : {
 id: {
@@ -14,8 +24,6 @@ id: {
 },
 username: String
 }
-
-
 });
 
 const allPost = mongoose.model("allPost",postSchema);

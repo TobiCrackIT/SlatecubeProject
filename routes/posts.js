@@ -29,21 +29,21 @@ res.render("posts/new");
 });
 
 
-//route to create posts
-
+//CREATE - Add new Posts
 
 router.post("/posts", function(req, res){
 
+  var title = req.body.title;
   var message = req.body.message;
 
   //connect post to a user
+  
+  var author = 
+    {    id: req.user._id,
+        username : req.user.username
+    }
 
-  // var author = 
-  //   {    id: req.user._id,
-  //       username : req.user.username
-  //   }
-
-    var newPost = {message:message}
+    var newPost = {title:title, message:message, author:author};
 
     //Create a new Post and add it to the DATEBASE
 
@@ -58,6 +58,8 @@ router.post("/posts", function(req, res){
     })
 
 });
+
+//SHOW - show a particular user post
 
 
 //Delete post

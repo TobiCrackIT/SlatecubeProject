@@ -31,8 +31,7 @@ router.post("/register", (req,res)=>{
   let fullname = req.body.fullname;
   let username = req.body.username;
   let password = req.body.password;
-  let image    = req.body.image;
-  let userInfo = {fullname:fullname,username:username,password:password, image:image};
+  let userInfo = {fullname:fullname,username:username,password:password};
 
   User.register(userInfo, req.body.password, (err, newUser)=>{
 if(err){
@@ -67,7 +66,7 @@ passport.authenticate("local")(req, res,()=>{
   {
     
     successRedirect:"/posts",
-  failureRedirect:"/login"
+    failureRedirect:"/login"
  
   }), (req,res)=>{
   

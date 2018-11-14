@@ -1,36 +1,31 @@
-
 <% include ../partials/header%>
-
-
-<div class="text-center mt-5">
-
-  <form action="/posts" method="POST" style="width:50%">
-    <div class="form-group">
-      <input class="form-control" type="text" name="message" placeholder="Enter Your Post">
-    </div>
-    
-        <div class ="form-group">
-            <input class="btn btn-dark" type="submit">
-    
-        </div>
-    </form>
-    
-    
-
-</div>
-
-
 
 <div class="container text-center">
 
+  <div class="jumbotron">
+      <h1>Welcome To FriendsMeet</h1>
+      <p>Connects with friends all over the world</p>
+      <a class="btn btn-primary btn-large" href="/posts/new">Add New Posts</a>
+
+  </div>
 
 <% allPosts.forEach(function(post){ %>
+  <div class="mb-5">
+      <h1><%=post.title%></h1>
+      <h6><%=post.message%></h6>
+      <p>
+          <em>created By <%= post.author.username %></em>
+          <p class="small"><%=post.date.toDateString()%></p>
+      </p>
+      <p>
+          <a href="/postss/<%= post._id %>" class="btn btn-primary">More Info</a>
+      </p>
+      <form action="/posts/<%=post._id%>?_method=DELETE" method="POST" style="display:block">
+        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</button> 
+      </form>
+  </div>
+  
 
-  <h1><%=post.message%></h1>
-
-  <form action="/posts/<%=post._id%>?_method=DELETE" method="POST" style="display:block">
-    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button> 
-  </form>
 <% }) %>
 
 
