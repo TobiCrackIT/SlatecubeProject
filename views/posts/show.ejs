@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<div>
+    <h1><%=post.title%></h1>
+    <h6><%=post.message%></h6>
+    <p>
+        <em>Post author: <%= post.author.username %></em>
+        <p class="small"><%=post.date.toDateString()%></p>
+    </p>
+    <p>
+    
+   <% if(currentUser && post.author.id.equals(currentUser._id)){ %>
+      <a class="btn btn-warning mr-1" href="/posts/<%= post._id %>/edit" style="float: left">Edit</a>
+      <form style="display:inline" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+          <button class="btn btn-danger">Delete</button>
+      </form>
+   <% } %>
+
+</div>
+

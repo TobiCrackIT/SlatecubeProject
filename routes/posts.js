@@ -60,7 +60,35 @@ router.post("/posts", function(req, res){
 });
 
 //SHOW - show a particular user post
+router.get("/posts/:id", (req, res) => {
+  // find the post with provied ID
+  allPost.findById(req.params.id, (err, foundPost) => {
+    if(err){
+      throw err;
+    } else {
+      // render show template with that post
+      res.render("posts/show", {post: foundPost});
+    }
+  })
+});
 
+// EDIT POST
+router.get("/posts/:id/edit", (req, res) => {
+  allPost.findById(req.params.id, (err, foundPost) => {
+    res.render("posts/edit", {post: foundPost});
+  })
+});
+
+// UPDATE POST ROUTE
+router.put("/posts/:id", (req, res) => {
+  allPost.findByIdAndUpdate(req.params.id, req.body.post, (err, updatedPost) => {
+    if(err){
+      res.redirect("/posts");
+    } else {
+      res.redirect("/posts/" + req.params.id);
+    }
+  })
+})
 
 //Delete post
 

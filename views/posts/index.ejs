@@ -14,15 +14,15 @@
       <h1><%=post.title%></h1>
       <h6><%=post.message%></h6>
       <p>
-          <em>created By <%= post.author.username %></em>
-          <p class="small"><%=post.date.toDateString()%></p>
+          <em>Post author: <%= post.author.username %></em>
+          <p class="small"><%=post.date%></p>
       </p>
       <p>
-          <a href="/postss/<%= post._id %>" class="btn btn-primary">More Info</a>
+          <a href="/posts/<%= post._id %>" class="btn btn-primary">More Info</a>
       </p>
-      <form action="/posts/<%=post._id%>?_method=DELETE" method="POST" style="display:block">
+      <!-- <form action="/posts/<%=post._id%>?_method=DELETE" method="POST" style="display:block">
         <button class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</button> 
-      </form>
+      </form> -->
   </div>
   
 
