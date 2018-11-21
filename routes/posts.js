@@ -2,7 +2,8 @@ const express = require("express");
 
       router = express.Router();
 
-const allPost = require("../models/posts");    
+const allPost = require("../models/posts");  
+let middleware = require("../middleware");
 
 
 //ROUTES
@@ -23,7 +24,7 @@ router.get("/posts", (req, res)=>{
 
 
 //SHow form to create new post
-router.get("/posts/new",function(req, res){
+router.get("/posts/new", middleware.isLoggedIn, function(req, res){
 
 res.render("posts/new");
 });
@@ -31,10 +32,11 @@ res.render("posts/new");
 
 //CREATE - Add new Posts
 
-router.post("/posts", function(req, res){
+router.post("/posts", middleware.isLoggedIn, function(req, res){
 
   var title = req.body.title;
   var message = req.body.message;
+  var middleware = require("../middleware");
 
   //connect post to a user
   
@@ -73,14 +75,14 @@ router.get("/posts/:id", (req, res) => {
 });
 
 // EDIT POST
-router.get("/posts/:id/edit", (req, res) => {
+router.get("/posts/:id/edit", middleware.checkPostOwnership, (req, res) => {
   allPost.findById(req.params.id, (err, foundPost) => {
     res.render("posts/edit", {post: foundPost});
   })
 });
 
 // UPDATE POST ROUTE
-router.put("/posts/:id", (req, res) => {
+router.put("/posts/:id", middleware.checkPostOwnership, (req, res) => {
   allPost.findByIdAndUpdate(req.params.id, req.body.post, (err, updatedPost) => {
     if(err){
       res.redirect("/posts");
@@ -92,7 +94,7 @@ router.put("/posts/:id", (req, res) => {
 
 //Delete post
 
-router.delete("/posts/:id", (req, res)=>{
+router.delete("/posts/:id", middleware.checkPostOwnership, (req, res)=>{
   allPost.findByIdAndDelete(req.params.id, function(err, deletedPost){
 if(err){
   console.log(err);

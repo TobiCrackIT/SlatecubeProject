@@ -24,13 +24,14 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav  ml-auto">
 
-            
+            <% if(!currentUser){ %>
             <a class=" mynavs nav-item nav-link btn btn-xs  mr-4" href="/login">Login</a>
             <a class=" mynavs nav-item nav-link  btn btn-xs" href="/register">Sign Up</a>
-           
+            <% } else { %>
 
+             <li class=" mynavs nav-item nav-link  btn btn-xs"><i>Welcome <%= currentUser.username %></i></li>
             <a class=" mynavs nav-item nav-link  btn btn-xs" href="/logout">Logout</a>
-            
+            <% } %>
           </div>
         </div>
       </nav>

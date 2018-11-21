@@ -7,6 +7,7 @@ const express = require("express"),
         mongoose =    require("mongoose"),
         passport     = require("passport"),
          LocalStrategy= require("passport-local"),
+         flash          = require("connect-flash"),
          session       = require("express-session"),
          allPost          = require("./models/posts.js"),
          User          = require("./models/users.js");
@@ -22,6 +23,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
+app.use(flash());
 
 //PASSPORT CONFIGURATIONS
 //passport middlewares
@@ -43,7 +45,8 @@ passport.deserializeUser(User.deserializeUser());
 // Set Local Variables
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
-  
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success"); 
   next();
 });
 
