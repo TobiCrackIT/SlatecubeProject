@@ -23,7 +23,16 @@ id: {
   ref: "User"
 },
 username: String
-}
+},
+
+created: {type: Date, default: Date.now},
+comments: [
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+    }
+]
+
 });
 
 const allPost = mongoose.model("allPost",postSchema);

@@ -64,14 +64,14 @@ router.post("/posts", middleware.isLoggedIn, function(req, res){
 //SHOW - show a particular user post
 router.get("/posts/:id", (req, res) => {
   // find the post with provied ID
-  allPost.findById(req.params.id, (err, foundPost) => {
+  allPost.findById(req.params.id).populate("comments").exec(function(err, foundPost){
     if(err){
       throw err;
     } else {
       // render show template with that post
       res.render("posts/show", {post: foundPost});
     }
-  })
+  });
 });
 
 // EDIT POST

@@ -56,9 +56,13 @@ app.use(function(req, res, next){
 const postRoute = require("./routes/posts"),
 
       authRoute = require("./routes/auth");
+      commentRoute = require("./routes/comments");
+
 //Using the routes
 app.use(postRoute);
 app.use(authRoute);
+app.use("/posts/:id/comments", commentRoute);
+
 
 
 

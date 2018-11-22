@@ -16,5 +16,28 @@
       </form>
    <% } %>
 
+   
+   <hr>
+
+   <div class="well">
+
+           <div class="text-right">
+               <a class="btn btn-success btn-sm" href="/posts/<%= post._id %>/comments/new">Add a Comment</a>
+           </div>
+
+   <% post.comments.forEach(function(comment){ %>
+               <div class="row">
+                   <div class="col-md-12">
+                       <strong><%= comment.author.username %></strong>
+                       <p><%= comment.text %></p>
+                       <p class="small"><%=post.date.toDateString()%></p>
+                   </div>
+               </div>
+               <p>
+               </p>
+           <% }); %>
+
+   </div>
+
 </div>
 
