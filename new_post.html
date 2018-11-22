@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/fav-icon.png" type="image/x-icon" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>FriendsMeet - Meet Friendly Friends</title>
+
+    <!-- Icon css link -->
+
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+
+
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!--================Main header Area =================-->
+    <header class="header_menu_area">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!--for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                    <a class="navbar-brand logo_text" href="index.html"><!--<img src="img/logo.png" alt="">--><span>Friends</span>Meet</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li> <a href="index.html">Home</a> </li>
+
+                        <li> <a href="#recs">Recommendations</a> </li>
+                        <li> <a href="discussions.html">Explore</a> </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="profile.html"><i class="fa fa-cog"></i>Profile</a></li>
+                        <li><a href="http://slatecube.com" id="logout"><i class="mdi mdi-key-variant"></i>Log Out</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+    </header>
+    <!--Header ends-->
+
+    <!--================Banner Area =================-->
+    <section class="banner_area" style="margin-bottom:30px;">
+        <div class="container">
+            <div class="banner_content">
+                <h3 title="Discussions"><img class="left_img" src="img/banner/t-left-img.png" alt="">New Post<img class="right_img" src="img/banner/t-right-img.png" alt=""></h3>
+                <a href="index.html">Home</a>
+                <a href="discussions.html">New Post</a>
+            </div>
+        </div>
+    </section>
+    <!--================End Banner Area =================-->
+
+    <div class="login_form_inner">
+        <h4>New Post</h4>
+        <form method="POST" action="discussions.html">
+            <input type="text" placeholder="Topic">
+            <input type="text" placeholder="Details">
+            <div class="login_btn_area">
+                <button type="submit" value="Finish" class="btn form-control login_btn">Finish</button>
+
+            </div>
+        </form>
+    </div>
+
+    <!--================Footer Area =================-->
+    <footer class="footer_area" style="margin-top:30px;">
+        <div class="footer_widgets_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <aside class="f_widget">
+                            <div class="vero_widget">
+                                <h4><span>Friends</span>Meet</h4>
+                                <p>The place for friendly friends changing the world through meaningful and challenging relationships.</p>
+                                <p>Connect with professionals from all parts of the world.</p>
+                            </div>
+                        </aside>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="copyright_left">
+                <div class="copyright_text">
+                    <h4>Copyright © 2018. <a href="#"><span>Friends</span>Meet</a> . All rights reserved.</h4>
+                </div>
+            </div>
+            <div class="copyright_right">
+                <div class="copyright_social">
+                    <ul>
+                        <li><a href="http://facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="http://twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="http://linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="http://google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--================End Footer Area =================-->
+</body>
+
+</html>
