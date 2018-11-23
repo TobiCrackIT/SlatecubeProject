@@ -36,7 +36,7 @@ router.post("/register", (req,res)=>{
   User.register(userInfo, req.body.password, (err, newUser)=>{
 if(err){
   console.log(err.message);
-  return   res.render("register");
+  return   res.render("register", {errormsg : err.message});
 
 }
 

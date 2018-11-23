@@ -1,34 +1,38 @@
 <% include ../partials/header%>
 
-<div class="container text-center">
-
-  <div class="jumbotron">
-      <h1>Welcome To FriendsMeet</h1>
-      <p>Connects with friends all over the world</p>
-      <a class="btn btn-primary btn-large" href="/posts/new">Add New Posts</a>
-
+<div class="container">
+  <div class="jumbotron text-center page-header">
+    <h1>Welcome To FriendsMeet</h1>
+    <p>Connects with friends all over the world</p>
+    <a class="btn btn-primary btn-large" href="/posts/new">Add New Posts</a>
   </div>
 
-<% allPosts.forEach(function(post){ %>
-  <div class="mb-5">
-      <h1><%=post.title%></h1>
-      <h6><%=post.message%></h6>
+  <% allPosts.forEach(function(post){ %>
+  <div class="jumbotron page-body">
+    <div class="mb-5">
+      <p class=""><strong><u><%=post.title%></u></strong></p>
+      <p><%=post.message%></p>
+
+      <div style="display:inline-block">
+        <em>Posted by: <%= post.author.username %> on</em>
+      </div>
+      <div  style="display:inline-block">
+            <p class="small"><%=post.date.toDateString()%></p>
+    </div>
+
+    
+<p>
+  <a href="#" title="Love it" class="btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Love it</a>
+</p>
+
       <p>
-          <em>Post author: <%= post.author.username %></em>
-          <p class="small"><%=post.date%></p>
+        <a href="/posts/<%= post._id %>" class="btn btn-primary">More Info</a>
       </p>
-      <p>
-          <a href="/posts/<%= post._id %>" class="btn btn-primary">More Info</a>
-      </p>
-      <!-- <form action="/posts/<%=post._id%>?_method=DELETE" method="POST" style="display:block">
-        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</button> 
-      </form> -->
+    </div>
   </div>
-  
 
-<% }) %>
-
-
-
+  <% }) %>
 </div>
+
+<section></section>
 <% include ../partials/footer%>
