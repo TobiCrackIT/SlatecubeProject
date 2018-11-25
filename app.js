@@ -10,6 +10,7 @@ const express = require("express"),
          flash          = require("connect-flash"),
          session       = require("express-session"),
          allPost          = require("./models/posts.js"),
+         Comment            = require("./models/comment.js");
          User          = require("./models/users.js");
 
 

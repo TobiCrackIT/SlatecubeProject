@@ -48,4 +48,37 @@ allPost.findById(req.params.id, function(err, post){
 });
 });
 
+// Comment edit route
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
+    if(err){
+        res.redirect("back");
+    } else{
+        res.render("comments/edit", {post_id: req.params.id, comment: foundComment});
+    }
+});
+});
+
+//COMMENT UPDATE ROUTE
+router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, upDatedComment){
+        if(err){
+            res.redirect("back");
+        } else{
+            res.redirect("/posts/" + req.params.id);
+        }
+    });
+});
+
+// COMMENT DELETE ROUTE
+router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else{
+            res.redirect("/posts/" + req.params.id);
+        }
+    });
+});
+
 module.exports = router;
