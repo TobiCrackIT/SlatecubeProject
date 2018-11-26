@@ -1,29 +1,116 @@
-<% include ../partials/header %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/fav-icon.png" type="image/x-icon" />
+    <!--
+      The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
 
-<div>
-    <h1><%=post.title%></h1>
-    <h6><%=post.message%></h6>
-    <p>
-        <em>Post author: <%= post.author.username %></em>
-        <p class="small"><%=post.date.toDateString()%></p>
-    </p>
-    <p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand text-white" href="/">FriendsMeet</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="nav navbar-nav navbar-right">
+          <% if(!currentUser){ %>
+            <a class=" mynavs nav-item nav-link btn btn-xs  mr-4" href="/login">Login</a>
+            <a class=" mynavs nav-item nav-link  btn btn-xs" href="/register">Sign Up</a>
+            <% } else { %>
+
+             <li class=" mynavs nav-item nav-link  btn btn-xs"><i>Welcome <%= currentUser.username %></i></li>
+            <a class=" mynavs nav-item nav-link  btn btn-xs" href="/logout">Logout</a>
+            <% } %>      
+            
+            
+      </div>
+    </div>
+
     
-   <% if(currentUser && post.author.id.equals(currentUser._id)){ %>
-      <a class="btn btn-warning mr-1" href="/posts/<%= post._id %>/edit" style="float: left">Edit</a>
-      <form style="display:inline" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-          <button class="btn btn-danger">Delete</button>
-      </form>
+
+  
+  </nav>
+  <div class="container">
+      <% if(error && error.length > 0){ %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <h6><%=error%></h6>  
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
    <% } %>
 
-   
-   <hr>
+   <% if(loggedout && loggedout.length > 0){ %>
+    <div class="alert alert-light alert-dismissible fade show" role="alert">
+      <h6><%=loggedout%></h6>  
 
-   <div class="well">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+   <% } %>
 
-           <div class="text-right">
-               <a class="btn btn-success btn-sm" href="/posts/<%= post._id %>/comments/new">Add a Comment</a>
-           </div>
+   <% if(success && success.length > 0){ %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong><h6><%=success%></h6> </strong> 
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <% } %>
+
+
+    
+        <% if( errormsg ){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong><h6> <%=errormsg%> </h6> </strong> 
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        <% } %>
+        
+     
+  </div>
+
+<div class="container mt-5">
+  <div class="jumbotron">
+      <h1><%=post.title%></h1>
+      <h6><%=post.message%></h6>
+      <p>
+          <em>Post author: <%= post.author.username %></em>
+          <p class="small"><%=post.date.toDateString()%></p>
+      </p>
+      <p>
+      
+     <% if(currentUser && post.author.id.equals(currentUser._id)){ %>
+        <a class="btn btn-warning mr-1" href="/posts/<%= post._id %>/edit" style="float: left"><i class="fas fa-edit"></i></a>
+        <form style="display:inline" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+        </form>
+     <% } %>
+  
+     
+     <div class="text-right">
+        <a class="btn btn-success btn-sm" href="/posts/<%= post._id %>/comments/new">Add a Comment</a>
+    </div>
+     
+     
+  </div>
+    
+
+   <div class="jumbotron">
+<div class="show-page">
+
 
    <% post.comments.forEach(function(comment){ %>
                <div class="row">
@@ -31,20 +118,27 @@
                        <strong><%= comment.author.username %></strong>
                        <p><%= comment.text %></p>
                        <p class="small"><%=post.date.toDateString()%></p>
-
                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-sm btn-warning" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit">Edit</a>
-                            <form id="delete-form" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                                        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                            <a class="btn btn-xs btn-warning" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit"><i class="fas fa-edit"></i></a>
+                            <form style="display:inline" id="delete-form" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                              <button class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
                             </form>
+<hr>
                         <% } %>
                    </div>
                </div>
                <p>
                </p>
            <% }); %>
-
+   </div>
    </div>
 
 </div>
 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

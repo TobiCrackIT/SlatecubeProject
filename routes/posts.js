@@ -17,7 +17,7 @@ router.get("/posts", (req, res)=>{
       console.log(err);
     }
 
-    res.render("posts/index", {allPosts:allPosts})
+    res.render("posts/index" , {allPosts:allPosts})
   })
 })
 
@@ -55,7 +55,7 @@ router.post("/posts", middleware.isLoggedIn, function(req, res){
         console.log(err);
       }
       console.log(createdPost);
-
+      req.flash("success", "Your post has been created");
       res.redirect("/posts");
     })
 
@@ -87,6 +87,8 @@ router.put("/posts/:id", middleware.checkPostOwnership, (req, res) => {
     if(err){
       res.redirect("/posts");
     } else {
+      req.flash("success", "Your post has been updated successfully");
+
       res.redirect("/posts/" + req.params.id);
     }
   })
@@ -100,6 +102,7 @@ if(err){
   console.log(err);
   res.redirect("/posts");
 }else{
+  req.flash("success", "Your post has been Deleted successfully");
 
   res.redirect("/posts");
 

@@ -23,6 +23,7 @@ const express = require("express"),
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
 app.use(flash());
 
@@ -48,6 +49,8 @@ app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   res.locals.error = req.flash("error");
   res.locals.success = req.flash("success"); 
+  res.locals.loggedout = req.flash("loggedout"); 
+
   res.locals.errormsg = req.err;
 
   next();

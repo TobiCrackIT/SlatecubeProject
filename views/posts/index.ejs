@@ -1,38 +1,273 @@
-<% include ../partials/header%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/fav-icon.png" type="image/x-icon" />
+    <!--
+      The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    -->
+    <title>FriendsMeet - Meet Friendly Friends</title>
 
-<div class="container">
-  <div class="jumbotron text-center page-header">
-    <h1>Welcome To FriendsMeet</h1>
-    <p>Connects with friends all over the world</p>
-    <a class="btn btn-primary btn-large" href="/posts/new">Add New Posts</a>
-  </div>
+    <!-- Icon css link -->
 
-  <% allPosts.forEach(function(post){ %>
-  <div class="jumbotron page-body">
-    <div class="mb-5">
-      <p class=""><strong><u><%=post.title%></u></strong></p>
-      <p><%=post.message%></p>
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
 
-      <div style="display:inline-block">
-        <em>Posted by: <%= post.author.username %> on</em>
-      </div>
-      <div  style="display:inline-block">
-            <p class="small"><%=post.date.toDateString()%></p>
-    </div>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+
+  <body>
+    <!-- ================Main header Area ================= -->
+    <header class="header_menu_area">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <!-- for better mobile display -->
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span> <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo_text" href="/posts"
+              ><!-- <img src="img/logo.png" alt="">
+              --><span>Friends</span>Meet</a
+            >
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div
+            class="collapse navbar-collapse"
+            id="bs-example-navbar-collapse-1"
+          >
     
-<p>
-  <a href="#" title="Love it" class="btn btn-counter multiple-count" data-count="0"><span>&#x2764;</span> Love it</a>
-</p>
 
-      <p>
-        <a href="/posts/<%= post._id %>" class="btn btn-primary">More Info</a>
-      </p>
+            <% if(!currentUser){ %>
+
+            <ul class="nav navbar-nav">
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Sign up</a></li>
+
+            </ul>
+            <% } else { %>
+
+
+            <ul class="nav navbar-nav navbar-right">
+              
+              <li>
+                <a href="/logout" id="logout"
+                  ><i class="mdi mdi-key-variant"></i>Log Out</a
+                >
+              </li>
+            </ul>
+            <% } %> 
+          </div>
+        </div>
+      </nav>
+
+      
+    </header>
+    
+    <!-- Header ends -->
+
+    <!-- ================Banner Area ================= -->
+    <section class="banner_area">
+      <div class="container">
+        <div class="banner_content">
+          <h3 title="Discussions">
+            <img
+              class="left_img"
+              src="img/banner/t-left-img.png"
+              alt=""
+            />Trending Posts<img
+              class="right_img"
+              src="img/banner/t-right-img.png"
+              alt=""
+            />
+          </h3>
+          <a href="/">Home</a>
+        </div>
+      </div>
+    </section>
+    <!-- ================End Banner Area ================= -->
+
+    <div class="container">
+            <% if(error && error.length > 0){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h6><%=error%></h6>  
+    
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         <% } %>
+  
+         <% if(loggedout && loggedout.length > 0){ %>
+          <div class="alert alert-light alert-dismissible fade show" role="alert">
+            <h6><%=loggedout%></h6>  
+    
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         <% } %>
+  
+         <% if(success && success.length > 0){ %>
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong><h6><%=success%></h6> </strong> 
+    
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <% } %>
+  
+  
+          
+              <% if( errormsg ){ %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><h6> <%=errormsg%> </h6> </strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              <% } %>
+              
+           
+        </div>
+    <div class="container">
+      <div class="jumbotron text-center page-header">
+        <h1>Welcome To FriendsMeet</h1>
+        <p>Connects with friends all over the world</p>
+        <a class="btn btn-primary btn-large" href="/posts/new">Add New Posts</a>
+      </div>
+
+      <div class="row">
+          
+        <div class="col-md-9">
+                <% allPosts.forEach(function(post){ %>
+
+                <div class="jumbotron page-body">
+                        <div class="mb-5">
+                          <p class="">
+                            <strong><%=post.title%></strong>
+                          </p>
+                          <p><%=post.message%></p>
+                
+                          <div style="display:inline-block">
+                            <em>Posted by: <strong><%= post.author.username %> </strong> on</em>
+                          </div>
+                          <div style="display:inline-block">
+                            <i class="small"><%=post.date.toDateString()%></i>
+                          </div>
+                <br>
+                <br>
+                          <p>
+                            <a href="/posts/<%= post._id %>" class="btn btn-primary"
+                              >More Info</a
+                            >
+                          </p>
+                        </div>
+                        
+                      </div>
+                
+                      <% }) %>
+        </div>
+    
+        <div class="col-md-3" id="recs">
+                <div class="right_sidebar_area">
+
+                    <aside class="s_widget replies_widget">
+                        <div class="s_title">
+                            <a href="/posts/new">
+                                <h4>New Post</h4>
+                            </a>
+                            <img src="img/widget-title-border.png" alt="">
+                        </div>
+                        
+                    </aside>
+                </div>
+            </div>
     </div>
-  </div>
+     
+    </div>
 
-  <% }) %>
-</div>
+    <!-- ================Footer Area ================= -->
+    <footer class="footer_area">
+      <div class="footer_widgets_area">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <aside class="f_widget">
+                <div class="vero_widget">
+                  <h4><span>Friends</span>Meet</h4>
+                  <p>
+                    The place for friendly friends changing the world through
+                    meaningful and challenging discussions.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<section></section>
-<% include ../partials/footer%>
+      <div class="copyright">
+        <div class="copyright_left">
+          <div class="copyright_text">
+            <h4>
+              Copyright © 2018. <a href="#"><span>Friends</span>Meet</a> . All
+              rights reserved.
+            </h4>
+          </div>
+        </div>
+        <div class="copyright_right">
+          <div class="copyright_social">
+            <ul>
+              <li>
+                <a href="#"
+                  ><i class="fa fa-facebook" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa fa-twitter" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa fa-linkedin" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa fa-google-plus" aria-hidden="true"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ================End Footer Area ================= -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <!--
+      Include all compiled plugins (below), or include individual files as needed
+    -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

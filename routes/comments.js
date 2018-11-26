@@ -41,6 +41,8 @@ allPost.findById(req.params.id, function(err, post){
                comment.save();
                post.comments.push(comment);
                post.save();
+               req.flash("success", "Comment created successfully");
+
                res.redirect("/posts/" + post._id)
            }
        });
@@ -65,6 +67,8 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
         if(err){
             res.redirect("back");
         } else{
+            req.flash("success", "Comment edited successfully");
+
             res.redirect("/posts/" + req.params.id);
         }
     });
@@ -76,6 +80,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
         if(err){
             res.redirect("back");
         } else{
+            req.flash("success", "Comment Deleted successfully");
             res.redirect("/posts/" + req.params.id);
         }
     });
