@@ -52,26 +52,47 @@
             id="bs-example-navbar-collapse-1"
           >
     
+          <div class="container">
+              <!--for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand logo_text" href="#"><!--<img src="img/logo.png" alt="">--><span>Friends</span>Meet</a>
+              </div>
 
-            <% if(!currentUser){ %>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li> <a href="/">Home</a> </li>
+                      <li> <a href="/posts">Posts</a> </li>
 
-            <ul class="nav navbar-nav">
-              <li><a href="/login">Login</a></li>
-              <li><a href="/register">Sign up</a></li>
+                  </ul>
 
-            </ul>
-            <% } else { %>
+                  
 
 
-            <ul class="nav navbar-nav navbar-right">
-              
-              <li>
-                <a href="/logout" id="logout"
-                  ><i class="mdi mdi-key-variant"></i>Log Out</a
-                >
-              </li>
-            </ul>
-            <% } %> 
+                      <% if(currentUser){ %>
+                        <ul class="nav navbar-nav navbar-right">
+                          <li class="text-white mynavs nav-item"><i>Welcome <%= currentUser.username.toUpperCase()%></i></li>
+            
+                          <li>
+                            <a href="/logout" id="logout"
+                              ><i class="mdi mdi-key-variant"></i>Log Out</a
+                            >
+                          </li>
+                        </ul>
+                        <% } %> 
+                  </ul>
+              </div>
+
+          </div>
+
+           
+               
           </div>
         </div>
       </nav>
@@ -150,7 +171,9 @@
       <div class="jumbotron text-center page-header">
         <h1>Welcome To FriendsMeet</h1>
         <p>Connects with friends all over the world</p>
+        <%if(currentUser){%>
         <a class="btn btn-primary btn-large" href="/posts/new">Add New Posts</a>
+        <% } %>
       </div>
 
       <div class="row">
@@ -190,8 +213,8 @@
 
                     <aside class="s_widget replies_widget">
                         <div class="s_title">
-                            <a href="/posts/new">
-                                <h4>New Post</h4>
+                            <a href="#">
+                                <h4>Recent Post</h4>
                             </a>
                             <img src="img/widget-title-border.png" alt="">
                         </div>

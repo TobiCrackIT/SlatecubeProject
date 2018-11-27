@@ -45,9 +45,9 @@
 
     <div class="login_form_inner zoom-anim-dialog mfp-hide" id="small-dialog">
         <h4>User Login</h4>
-        <form method="POST" action="discussions.html">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+        <form method="POST" action="/login">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
             <div class="login_btn_area">
                 <button type="submit" value="Login" class="btn form-control login_btn">Login</button>
 
@@ -66,40 +66,20 @@
             <div class="col-md-6">
                 <div class="registration_form_s">
                     <h4>Registration</h4>
-                    <form>
+                    <form action="/register" method="POST">
+                        
                         <div class="form-group">
-                            <input type="email" class="form-control" id="reg_email" placeholder="Email">
+                            <input type="text" class="form-control" name="fullname" id="reg_first" placeholder="Full Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="reg_first" placeholder="Full Name">
+                            <input type="text" class="form-control" name="username" id="reg_user" placeholder="Username">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="reg_user" placeholder="Username">
+                            <input type="email" class="form-control" name="email" id="reg_email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="reg_pass" placeholder="Password">
+                            <input type="password" class="form-control" name="password" id="reg_pass" placeholder="Password">
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="reg_pass" placeholder="Confirm Password">
-                        </div>
-                        <div class="form-group">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span data-bind="label">Gender</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Male</a></li>
-                                    <li><a href="#">Female</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="datepicker">
-                                <input type='text' class="form-control datetimepicker4" placeholder="Birthday" />
-                                <span class="add-on"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            </div>
-                        </div>
-
                         <div class="reg_chose form-group">
                             <button type="submit" value="LogIn" class="btn form-control login_btn" style="margin-bottom:10px;">Register</button>
                         </div>
@@ -122,16 +102,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand logo_text" href="index.html"><!--<img src="img/logo.png" alt="">--><span>Friends</span>Meet</a>
+                    <a class="navbar-brand logo_text" href="#"><!--<img src="img/logo.png" alt="">--><span>Friends</span>Meet</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li> <a href="index.html">Home</a> </li>
+                        <li> <a href="/">Home</a> </li>
+                        <li> <a href="/posts">Posts</a> </li>
 
-                        <li> <a href="#RECOMMENDATIONS">Recommendations</a> </li>
-                        <li> <a href="discussions.html">Explore</a> </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -145,7 +124,7 @@
 
         </nav>
     </header>
-
+   
 
     <!-- <section class="slider_area">
         <div class="slider_inner">
@@ -234,14 +213,14 @@
                 <div class="col-sm-4 col-xs-12">
                     <div class="welcome_item">
                         <img src="img/welcome-icon/w-icon-1.png" alt="">
-                        <h4 class="counter">5,000,000</h4>
+                        <h4 class="counter">2,300,000</h4>
                         <h6>Members</h6>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
                     <div class="welcome_item">
                         <img src="img/welcome-icon/w-icon-2.png" alt="">
-                        <h4 class="counter">23,000,000</h4>
+                        <h4 class="counter">14,000,000</h4>
                         <h6>Connections</h6>
                     </div>
                 </div>
@@ -343,15 +322,15 @@
                     <div class="find_soul_item">
                         <img src="img/soul-icon/soul-2.png" alt="">
                         <h4>Find friends</h4>
-                        <p>There are many options for you. We recommend friends based on similarities in personality. You can invite your friends to join the community....</p>
+                        <p>There are many options for you.  You can invite your friends to join the community....</p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="find_soul_item">
                         <img src="img/soul-icon/soul-4.png" alt="">
-                        <h4>Start Chatting</h4>
-                        <p>Take your newly found friendship to a whole new level of intimacy, trust and appreciation.</p>
+                        <h4>Start Discussion</h4>
+                        <p>Take on posts that you find interesting to a whole new level of trust, collaboration and appreciation.</p>
                     </div>
                 </div>
             </div>
@@ -359,7 +338,7 @@
     </section>
 
 
-    <!--================Testimonials Area =================-->
+    <!--
     <section class="testimonials_area">
         <div class="container">
             <div class="welcome_title">
@@ -444,11 +423,9 @@
             </div>
         </div>
     </section>
-    <!--================End Testimonials Area =================-->
 
 
 
-    <!--================Recommendations Area =================-->
     <section id="RECOMMENDATIONS" class="register_members_slider">
         <div class="container">
             <div class="welcome_title">
@@ -507,7 +484,7 @@
             </div>
         </div>
     </section>
-    <!--================End Register Members  slider Area =================-->
+    -->
 
 
 
@@ -520,8 +497,7 @@
                         <aside class="f_widget">
                             <div class="vero_widget">
                                 <h4><span>Friends</span>Meet</h4>
-                                <p>The place for friendly friends changing the world through meaningful and challenging relationships.</p>
-                                <p>Connect with professionals from all parts of the world.</p>
+                                <p>The place for people to build friendship via interesting discussions.</p>
                             </div>
                         </aside>
                     </div>
@@ -540,10 +516,10 @@
             <div class="copyright_right">
                 <div class="copyright_social">
                     <ul>
-                        <li><a href="http://facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="http://twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="http://linkedin.com"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                        <li><a href="http://google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>

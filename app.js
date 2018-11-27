@@ -3,6 +3,7 @@ const express = require("express"),
         app = express();
 
  const   bodyParser   = require("body-parser"),
+          path        = require("path")
         methodOverride = require("method-override"),
         mongoose =    require("mongoose"),
         passport     = require("passport"),
@@ -23,8 +24,8 @@ const express = require("express"),
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
-app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "htmlFiles"));
 app.use(flash());
 
 //PASSPORT CONFIGURATIONS

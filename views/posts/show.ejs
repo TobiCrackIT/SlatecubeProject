@@ -21,11 +21,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="nav navbar-nav navbar-right">
           <% if(!currentUser){ %>
-            <a class=" mynavs nav-item nav-link btn btn-xs  mr-4" href="/login">Login</a>
-            <a class=" mynavs nav-item nav-link  btn btn-xs" href="/register">Sign Up</a>
+            <a class=" mynavs nav-item nav-link btn btn-xs  mr-4" href="/login">Home</a>
+            <a class=" mynavs nav-item nav-link  btn btn-xs" href="/posts">Go Back to Posts</a>
             <% } else { %>
 
-             <li class=" mynavs nav-item nav-link  btn btn-xs"><i>Welcome <%= currentUser.username %></i></li>
+             <li class=" mynavs nav-item nav-link  btn btn-xs"><i>Welcome <%= currentUser.username.toUpperCase()%></i></li>
             <a class=" mynavs nav-item nav-link  btn btn-xs" href="/logout">Logout</a>
             <% } %>      
             
@@ -101,7 +101,9 @@
   
      
      <div class="text-right">
+       <% if(currentUser){%>
         <a class="btn btn-success btn-sm" href="/posts/<%= post._id %>/comments/new">Add a Comment</a>
+       <% } %>
     </div>
      
      
@@ -109,7 +111,7 @@
     
 
    <div class="jumbotron">
-<div class="show-page">
+      <div class="show-page">
 
 
    <% post.comments.forEach(function(comment){ %>

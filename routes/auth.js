@@ -11,10 +11,14 @@ const express = require("express"),
 
  // ROOT ROUTE
  
- router.get("/", (req, res)=>{
+//  router.get("/", (req, res)=>{
 
-  res.render("landing");
- });
+//   res.sendFile(__dirname + '/homepage.html');
+//  });
+
+ router.get('/',(req,res)=>{
+  res.sendFile(__dirname + '/homepage.html')
+});
 
  //show register page
 
@@ -30,8 +34,9 @@ router.post("/register", (req,res)=>{
 
   let fullname = req.body.fullname;
   let username = req.body.username;
+  let email = req.body.email;
   let password = req.body.password;
-  let userInfo = {fullname:fullname,username:username,password:password};
+  let userInfo = {fullname:fullname,username:username, email:email,password:password};
 
   User.register(userInfo, req.body.password, (err, newUser)=>{
 if(err){
@@ -51,8 +56,8 @@ passport.authenticate("local")(req, res,()=>{
 
   //Show login page
   router.get("/login", (req, res)=>{
-  
-    res.render("login");
+  req.flash("error", "Please Login first")
+    res.redirect("/");
   });
   
   
