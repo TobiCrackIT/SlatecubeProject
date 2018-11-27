@@ -3,7 +3,8 @@ const express = require("express"),
         app = express();
 
  const   bodyParser   = require("body-parser"),
-          path        = require("path")
+          path        = require("path"),
+          SessionStore = require('session-mongoose')(express),
         methodOverride = require("method-override"),
         mongoose =    require("mongoose"),
         passport     = require("passport"),
