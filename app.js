@@ -2,13 +2,14 @@ const express = require("express"),
 
         app = express();
 
- const   bodyParser   = require("body-parser"),
-        methodOverride = require("method-override"),
-        mongoose =    require("mongoose"),
-        passport     = require("passport"),
+ 
+const mongoose     = require("mongoose"),
+         bodyParser   = require("body-parser"),
+         methodOverride = require("method-override"),
+         passport     = require("passport"),
          LocalStrategy= require("passport-local"),
-         flash          = require("connect-flash"),
          session       = require("express-session"),
+         flash         = require("connect-flash"),        
          allPost          = require("./models/posts.js"),
          Comment            = require("./models/comment.js");
          User          = require("./models/users.js");
