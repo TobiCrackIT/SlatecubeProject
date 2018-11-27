@@ -3,8 +3,6 @@ const express = require("express"),
         app = express();
 
  const   bodyParser   = require("body-parser"),
-          path        = require("path"),
-          SessionStore = require('session-mongoose')(express),
         methodOverride = require("method-override"),
         mongoose =    require("mongoose"),
         passport     = require("passport"),
@@ -36,6 +34,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
