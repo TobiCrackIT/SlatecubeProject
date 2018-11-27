@@ -16,7 +16,7 @@ const express = require("express"),
 
 
       // connect MONGODB
- mongoose.connect("mongodb://localhost/friendsMEET", {useNewUrlParser:true})
+//  mongoose.connect("mongodb://localhost/friendsMEET", {useNewUrlParser:true})
 
       let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
 
