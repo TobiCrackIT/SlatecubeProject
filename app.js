@@ -5,6 +5,7 @@ const express = require("express"),
  
 const mongoose     = require("mongoose"),
          bodyParser   = require("body-parser"),
+         expressSanitizer = require("express-sanitizer"),
          methodOverride = require("method-override"),
          passport     = require("passport"),
          LocalStrategy= require("passport-local"),
@@ -23,6 +24,7 @@ let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
       mongoose.connect(url,{useNewUrlParser:true});
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 // app.use(express.static(__dirname + "htmlFiles"));

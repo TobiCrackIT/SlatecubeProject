@@ -34,6 +34,8 @@ res.render("posts/new");
 
 router.post("/posts", middleware.isLoggedIn, function(req, res){
 
+  req.body.message = req.sanitize(req.body.message);
+
   var title = req.body.title;
   var message = req.body.message;
   var middleware = require("../middleware");
@@ -83,6 +85,7 @@ router.get("/posts/:id/edit", middleware.checkPostOwnership, (req, res) => {
 
 // UPDATE POST ROUTE
 router.put("/posts/:id", middleware.checkPostOwnership, (req, res) => {
+  req.body.post.message = req.sanitize(req.body.post.message);
   allPost.findByIdAndUpdate(req.params.id, req.body.post, (err, updatedPost) => {
     if(err){
       res.redirect("/posts");

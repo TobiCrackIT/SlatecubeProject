@@ -25,6 +25,7 @@ allPost.findById(req.params.id, function(err, post){
 
 // adds comment
 router.post("/", function(req, res){
+  req.body.comment.text = req.sanitize(req.body.comment.text);
 allPost.findById(req.params.id, function(err, post){
    if(err){
        console.log(err);
@@ -63,6 +64,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 
 //COMMENT UPDATE ROUTE
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
+  req.body.comment.text = req.sanitize(req.body.comment.text);
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, upDatedComment){
         if(err){
             res.redirect("back");
