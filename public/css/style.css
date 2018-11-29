@@ -65,6 +65,11 @@ h6 {
     padding: 0px;
 }
 
+.postmaq{
+    color:rgb(82, 139, 139);
+    text-shadow: 4px 5px 5px teal;
+}
+
 #custom-handle {
     width: 3em;
     height: 1.6em;
