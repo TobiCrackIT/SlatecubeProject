@@ -10,6 +10,7 @@ const mongoose     = require("mongoose"),
          passport     = require("passport"),
          LocalStrategy= require("passport-local"),
          session       = require("express-session"),
+         cookieSession = require('cookie-session'),
          flash         = require("connect-flash"),        
          allPost          = require("./models/posts.js"),
          Comment            = require("./models/comment.js");
@@ -32,12 +33,19 @@ app.use(flash());
 
 //PASSPORT CONFIGURATIONS
 //passport middlewares
-app.use(session({
-  secret: "rover",
-  resave: false,
-  saveUninitialized: true
-}))
+// app.use(session({
+//   secret: "rover",
+//   resave: false,
+//   saveUninitialized: true
+// }))
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ["jojojojo"],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 
 app.use(passport.initialize());
