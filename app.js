@@ -10,7 +10,7 @@ const mongoose     = require("mongoose"),
          passport     = require("passport"),
          LocalStrategy= require("passport-local"),
          session       = require("express-session"),
-         MongoStore = require('connect-mongo')(session),
+         RedisStore  = require('connect-redis')(session),
          flash         = require("connect-flash"),        
          allPost          = require("./models/posts.js"),
          Comment            = require("./models/comment.js");
@@ -23,6 +23,7 @@ const mongoose     = require("mongoose"),
 let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
 
       mongoose.connect(url,{useNewUrlParser:true});
+      mongoose.set('useCreateIndex', true);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
@@ -33,23 +34,27 @@ app.use(flash());
 
 //PASSPORT CONFIGURATIONS
 //passport middlewares
+app.use(session({
+  secret: "rover",
+  resave: false,
+  saveUninitialized: true
+}))
+
+// app.set('trust proxy', 1);
 // app.use(session({
-//   secret: "rover",
-//   resave: false,
-//   saveUninitialized: true
+//   store : new RedisStore(),
+//   secret: 'secret',
+// saveUninitialized: true,
+// resave: false
 // }))
 
-app.use(session({
-  secret: 'jojo',
-    resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 1200000 },
-  store: new MongoStore({  
-  url: 'mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet',
-  interval: 1200000
-})
-}));
 
+// app.use(function(req,res,next){
+//   if(!req.session){
+//       return next(new Error('Oh no')) //handle error
+//   }
+//   next() //otherwise continue
+//   });
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -96,3 +101,4 @@ app.use("/posts/:id/comments", commentRoute);
  app.listen(process.env.IP, process.env.PORT, ()=>{
    console.log("Friends Meet App started")
  })
+
