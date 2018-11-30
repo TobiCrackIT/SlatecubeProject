@@ -10,7 +10,8 @@ const mongoose     = require("mongoose"),
          passport     = require("passport"),
          LocalStrategy= require("passport-local"),
          session       = require("express-session"),
-         RedisStore  = require('connect-redis')(session),
+         MongoStore  = require('connect-mongo')(session),
+         cookieParser = require("cookie-parser"),
          flash         = require("connect-flash"),        
          allPost          = require("./models/posts.js"),
          Comment            = require("./models/comment.js");
@@ -22,39 +23,38 @@ const mongoose     = require("mongoose"),
 
 let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
 
-      mongoose.connect(url,{useNewUrlParser:true});
+      mongoose.connect(url,{ useMongoClient: true});
       mongoose.set('useCreateIndex', true);
+      mongoose.Promise = global.Promise;
+      const db = mongoose.connection;
+
+
+      
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
-// app.use(express.static(__dirname + "htmlFiles"));
+app.use(cookieParser())
 app.use(flash());
 
 //PASSPORT CONFIGURATIONS
 //passport middlewares
-app.use(session({
-  secret: "rover",
-  resave: false,
-  saveUninitialized: true
-}))
-
-// app.set('trust proxy', 1);
 // app.use(session({
-//   store : new RedisStore(),
-//   secret: 'secret',
-// saveUninitialized: true,
-// resave: false
+//   secret: "rover",
+//   resave: false,
+//   saveUninitialized: true
 // }))
 
+app.use(session({
+  store : new MongoStore({mongooseConnection: db}),
+  secret: 'secret',
+saveUninitialized: true,
+resave: false
+}))
 
-// app.use(function(req,res,next){
-//   if(!req.session){
-//       return next(new Error('Oh no')) //handle error
-//   }
-//   next() //otherwise continue
-//   });
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
