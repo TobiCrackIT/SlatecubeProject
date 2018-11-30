@@ -41,7 +41,7 @@ app.use(flash());
 
 app.use(cookieSession({
   name: 'session',
-  keys: ["jojojojo"],
+  keys: ["jojojojo","ally"],
 
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
