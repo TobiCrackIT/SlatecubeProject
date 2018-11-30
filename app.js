@@ -10,8 +10,6 @@ const mongoose     = require("mongoose"),
          passport     = require("passport"),
          LocalStrategy= require("passport-local"),
          session       = require("express-session"),
-         SessionStore = require('session-mongoose')(express),
-         cookieSession = require('cookie-session'),
          flash         = require("connect-flash"),        
          allPost          = require("./models/posts.js"),
          Comment            = require("./models/comment.js");
@@ -34,44 +32,11 @@ app.use(flash());
 
 //PASSPORT CONFIGURATIONS
 //passport middlewares
-// app.use(session({
-//   store: new SessionStore({
-//     url : "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet",
-//     interval : 1200000
-//   }),
-//   cookie: { maxAge: 1200000 },
-//   secret: "rover",
-//   resave: false,
-//   saveUninitialized: true
-// }))
-
-app.set('trust proxy', 1);
-
 app.use(session({
-cookie:{
-    secure: true,
-    maxAge:60000
-       },
-store: new SessionStore(),
-secret: 'secret',
-saveUninitialized: true,
-resave: false
-}));
-
-app.use(function(req,res,next){
-  if(!req.session){
-      return next(new Error('Oh no')) //handle error
-  }
-  next() //otherwise continue
-  });
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ["jojojojo","ally"],
-
-//   // Cookie Options
-//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
-// }))
-
+  secret: "rover",
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
