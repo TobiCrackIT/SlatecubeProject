@@ -23,7 +23,7 @@ const mongoose     = require("mongoose"),
 
 let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
 
-      mongoose.connect(url,{ useMongoClient: true});
+      mongoose.connect(url,{ useNewUrlParser: true});
       mongoose.set('useCreateIndex', true);
       mongoose.Promise = global.Promise;
       const db = mongoose.connection;
