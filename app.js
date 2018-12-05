@@ -10,7 +10,6 @@ const mongoose     = require("mongoose"),
          passport     = require("passport"),
          LocalStrategy= require("passport-local"),
          session       = require("express-session"),
-         MongoStore  = require('connect-mongo')(session),
          cookieParser = require("cookie-parser"),
          flash         = require("connect-flash"),        
          allPost          = require("./models/posts.js"),
@@ -24,9 +23,7 @@ const mongoose     = require("mongoose"),
 let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
 
       mongoose.connect(url,{ useNewUrlParser: true});
-      mongoose.set('useCreateIndex', true);
-      mongoose.Promise = global.Promise;
-      const db = mongoose.connection;
+ 
 
 
       
@@ -39,19 +36,14 @@ app.use(cookieParser())
 app.use(flash());
 
 //PASSPORT CONFIGURATIONS
-//passport middlewares
-// app.use(session({
-//   secret: "rover",
-//   resave: false,
-//   saveUninitialized: true
-// }))
-
+// passport middlewares
 app.use(session({
-  store : new MongoStore({mongooseConnection: db}),
-  secret: 'secret',
-saveUninitialized: true,
-resave: false
+  secret: "rover",
+  resave: false,
+  saveUninitialized: true
 }))
+
+
 
 
 
@@ -92,13 +84,8 @@ app.use("/posts/:id/comments", commentRoute);
 
 
 
-
- app.listen(3000, ()=>{
+const port = process.env.PORT || 3000;
+ app.listen(port, ()=>{
    console.log("Friends Meet App started");
  })       
-
-//Coonect to MongoLab
- app.listen(process.env.IP, process.env.PORT, ()=>{
-   console.log("Friends Meet App started")
- })
 
