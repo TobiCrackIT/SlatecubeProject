@@ -84,8 +84,9 @@ app.use("/posts/:id/comments", commentRoute);
 
 
 
-const port = process.env.PORT || 3000;
- app.listen(port, ()=>{
+const port = process.env.PORT;
+const ip = process.env.IP;
+ app.listen(port, ip, ()=>{
    console.log("Friends Meet App started");
  })       
 
