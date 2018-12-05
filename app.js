@@ -20,9 +20,9 @@ const mongoose     = require("mongoose"),
       // connect MONGODB
 //  mongoose.connect("mongodb://localhost/friendsMEET", {useNewUrlParser:true})
 
-let url = "mongodb://meet:meet1990@ds033679.mlab.com:33679/friendsmeet" ;
+let url = process.env.databaseURL || "mongodb://localhost/friendsMEET" ;
 
-      mongoose.connect(url,{ useNewUrlParser: true});
+ mongoose.connect(url,{ useNewUrlParser: true});
  
 
 
@@ -83,6 +83,9 @@ app.use(authRoute);
 app.use("/posts/:id/comments", commentRoute);
 
 
+app.listen(3000, function(){
+  console.log("app started");
+})
 
 const port = process.env.PORT;
 const ip = process.env.IP;
